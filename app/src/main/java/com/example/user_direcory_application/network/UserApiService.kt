@@ -14,13 +14,13 @@ private val retrofit = Retrofit.Builder().addConverterFactory(ScalarsConverterFa
         .baseUrl(BASE_URL)
         .build()
 
-interface DirectoryApiService {
+interface UserApiService {
         @GET("users")
         suspend fun getUsers(): List<Users>
 }
 
 object UserApi {
-    val retrofitService: DirectoryApiService by lazy {
-        retrofit.create(DirectoryApiService::class.java)
+    val retrofitService: UserApiService by lazy {
+        retrofit.create(UserApiService::class.java)
     }
 }
