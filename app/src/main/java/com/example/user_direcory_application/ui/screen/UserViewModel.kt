@@ -17,7 +17,7 @@ sealed interface UserUiState {
     object  Loading : UserUiState
 }
 
-class DirectoryViewModel : ViewModel() {
+class UserViewModel : ViewModel() {
     var userUiState: UserUiState by mutableStateOf(UserUiState.Loading)
         private set
 
