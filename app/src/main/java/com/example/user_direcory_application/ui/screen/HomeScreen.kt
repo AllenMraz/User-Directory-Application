@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,7 +36,7 @@ fun HomeScreen(
 @Composable
 fun LoadingScreen(modifier: Modifier = Modifier) {
     Image(
-        modifier = modifier,
+        modifier = modifier.size(200.dp),
         painter = painterResource(R.drawable.ic_launcher_background),
         contentDescription = stringResource(R.string.loading)
     )
@@ -69,4 +70,16 @@ fun ErrorScreen(modifier: Modifier = Modifier) {
 @Composable
 fun ResultScreenPreview() {
     ResultScreen("Success")
+}
+
+@Preview
+@Composable
+fun LoadingScreenPreview(){
+    LoadingScreen()
+}
+
+@Preview
+@Composable
+fun ErrorScreenPreview(){
+    ErrorScreen()
 }

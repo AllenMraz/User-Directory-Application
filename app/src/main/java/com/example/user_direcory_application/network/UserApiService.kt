@@ -16,7 +16,7 @@ private val retrofit = Retrofit.Builder().addConverterFactory(ScalarsConverterFa
 
 interface UserApiService {
         @GET("users")
-        suspend fun getUsers(): List<Users>
+        suspend fun getId(): List<Users>
 }
 
 object UserApi {

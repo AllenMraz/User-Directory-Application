@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.user_direcory_application.model.Users
 import com.example.user_direcory_application.network.UserApi
 import kotlinx.coroutines.launch
 
@@ -29,9 +30,9 @@ class UserViewModel : ViewModel() {
         viewModelScope.launch{
             userUiState = UserUiState.Loading
             userUiState = try {
-                val listResult = UserApi.retrofitService.getUsers()
+                val listResult = UserApi.retrofitService.getId()
                 UserUiState.Success(
-                    "Success: ${listResult.size} Users retrieved"
+                    "Success:${listResult.size} Users retrieved"
                 )
 
             } catch (e: IOException) {
