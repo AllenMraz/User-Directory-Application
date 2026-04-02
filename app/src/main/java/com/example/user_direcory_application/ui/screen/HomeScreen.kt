@@ -27,7 +27,7 @@ fun HomeScreen(
     when (userUiState){
         is UserUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
         is UserUiState.Success -> ResultScreen(
-            userUiState.id, modifier = modifier.fillMaxSize()
+            userUiState.Users, modifier = modifier.fillMaxSize()
         )
         is UserUiState.Error -> ErrorScreen( modifier = modifier.fillMaxSize())
     }
