@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">User-Direcory-Application</string>
+    <string name="loading">Loading User Data</string>
+    <string name="loading_failed">Failed to load</string>
+</resources>
