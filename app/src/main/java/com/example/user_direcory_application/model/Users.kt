@@ -6,6 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Users(
     val id: String,
-    @SerialName(value = "id_src")
     val firstName: String
 )
