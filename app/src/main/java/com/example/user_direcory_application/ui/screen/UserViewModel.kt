@@ -5,26 +5,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.user_direcory_application.model.User
 import com.example.user_direcory_application.model.UserResponse
 import com.example.user_direcory_application.network.UserApi
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
-
 import retrofit2.HttpException
 import java.io.IOException
 
-/*"id: ${listResult.id} \n" +
-"Name: ${listResult.firstName} ${listResult.lastName} \n" +
-"Email: ${listResult.email} \n" +
-"Image: ${listResult.image} \n"*/
 
+// interface with presets for loading states
 sealed interface UserUiState {
     data class Success(val Users: UserResponse) : UserUiState
     object  Error : UserUiState
     object  Loading : UserUiState
 }
 
+// the main viewmodel class
 class UserViewModel : ViewModel() {
     var userUiState: UserUiState by mutableStateOf(UserUiState.Loading)
         private set
@@ -32,6 +27,8 @@ class UserViewModel : ViewModel() {
     init {
             getUsers()
     }
+
+    // function that gets the data from the api
     fun getUsers(){
         viewModelScope.launch{
             userUiState = UserUiState.Loading

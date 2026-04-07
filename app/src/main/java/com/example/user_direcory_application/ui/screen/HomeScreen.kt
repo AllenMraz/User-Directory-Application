@@ -2,7 +2,6 @@ package com.example.user_direcory_application.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -11,8 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,6 +28,7 @@ import com.example.user_direcory_application.R
 import com.example.user_direcory_application.model.User
 import com.example.user_direcory_application.model.UserResponse
 
+// determinants what to display based on what state the ui is in
 @Composable
 fun HomeScreen(
     userUiState: UserUiState,
@@ -43,7 +43,7 @@ fun HomeScreen(
         is UserUiState.Error -> ErrorScreen( modifier = modifier.fillMaxSize())
     }
 }
-
+// screen while loading
 @Composable
 fun LoadingScreen(modifier: Modifier = Modifier) {
     Image(
@@ -53,11 +53,11 @@ fun LoadingScreen(modifier: Modifier = Modifier) {
     )
 }
 
-
+// screen when it fails to get the data
 @Composable
 fun ErrorScreen(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier,
+        modifier = modifier.padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -73,7 +73,7 @@ fun ResultScreen(users: UserResponse, modifier: Modifier = Modifier)
 {
     val userList: List<User> = users.users
     LazyColumn(
-        modifier = modifier
+        modifier = modifier.padding(16.dp)
     )
     {
         items(userList){
@@ -82,17 +82,19 @@ fun ResultScreen(users: UserResponse, modifier: Modifier = Modifier)
         }
     }
 }
-
+//creates a card with the users information
 @Composable
 fun UserCard(user: User, modifier: Modifier = Modifier){
-    Card() {
+    Card(modifier.fillMaxSize().padding(8.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)) {
         Row() {
             AsyncImage(
                 ImageRequest.Builder(LocalContext.current).data(user.image)
                     .crossfade(true).build(),
                 placeholder = painterResource(R.drawable.ic_launcher_background),
                 contentDescription = user.id.toString(),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                modifier = modifier.padding(4.dp)
             )
 
             UserInfo(user.firstName, user.lastName, user.email)
@@ -102,10 +104,10 @@ fun UserCard(user: User, modifier: Modifier = Modifier){
 
     }
 }
-
+// gets the name a email of the user and puts it into a column
 @Composable
-fun UserInfo(firstName: String, lastName: String, email: String){
-    Column() {
+fun UserInfo(firstName: String, lastName: String, email: String, modifier: Modifier = Modifier){
+    Column(modifier.padding(16.dp)) {
         Text("$firstName $lastName")
 
         Text(email)
