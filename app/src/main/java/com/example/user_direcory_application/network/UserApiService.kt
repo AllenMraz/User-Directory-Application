@@ -12,7 +12,7 @@ import retrofit2.http.GET
 
 
 private const val BASE_URL =
-    "https://dummyjson.com/users/"
+    "https://dummyjson.com"
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
@@ -20,8 +20,9 @@ private val retrofit = Retrofit.Builder()
         .build()
 
 interface UserApiService {
-        @GET("1")
-        suspend fun getId(): User
+        @GET("user")
+        suspend fun getId(): UserResponse
+
 }
 
 object UserApi {

@@ -14,8 +14,13 @@ import kotlinx.serialization.json.Json
 import retrofit2.HttpException
 import java.io.IOException
 
+/*"id: ${listResult.id} \n" +
+"Name: ${listResult.firstName} ${listResult.lastName} \n" +
+"Email: ${listResult.email} \n" +
+"Image: ${listResult.image} \n"*/
+
 sealed interface UserUiState {
-    data class Success(val Users: String) : UserUiState
+    data class Success(val Users: UserResponse) : UserUiState
     object  Error : UserUiState
     object  Loading : UserUiState
 }
@@ -33,10 +38,7 @@ class UserViewModel : ViewModel() {
             userUiState = try {
                 val listResult = UserApi.retrofitService.getId()
                 UserUiState.Success(
-                    "id: ${listResult.id} \n" +
-                            "Name: ${listResult.firstName} ${listResult.lastName} \n" +
-                            "Email: ${listResult.email} \n" +
-                            "Image: ${listResult.image} \n"
+                    listResult
                 )
 
             } catch (e: IOException) {
